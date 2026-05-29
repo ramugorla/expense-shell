@@ -72,7 +72,7 @@ cp -r /home/ec2-user/expense-shell /etc/systemd/system/backend.service
 systemctl daemon-reload
 validate $? "Systemctl service reloading"
 
-systemctl start backend
+systemctl restart backend
 validate $? "backsend restart"
 
 systemctl enable backend

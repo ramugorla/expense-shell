@@ -49,7 +49,7 @@ else
     echo "Expense User already added"
 fi
 
-mkdir /app &>>$LOG_FILE_NAME
+mkdir -p /app &>>$LOG_FILE_NAME
 validate $? "Creating App directory"
 
 

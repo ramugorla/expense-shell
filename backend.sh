@@ -66,7 +66,7 @@ cd /app
 npm install
 validate $? "Installing Dependencies"
 
-cp -r /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
+cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
 
 
 dnf install mysql -y

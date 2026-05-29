@@ -43,7 +43,14 @@ systemctl status mysqld &>>$LOG_FILE_NAME
 netstat -lntp &>>$LOG_FILE_NAME
 ps -ef | grep mysqld &>>$LOG_FILE_NAME
 
+mysql -h 172.31.8.210 -u root -pExpenseApp@1 -e "show databases;"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 
-validate $? "Setting root password to Mysql"
+if [ $? -ne 0 ]
+then
+    echo "Mysql password not set up"
+    mysql_secure_installation --set-root-pass ExpenseApp@1 
+    validate $? "Setting root password to Mysql"
+else
+    echo "Mysql Root password already set up"
+fi
 

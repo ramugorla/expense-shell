@@ -28,7 +28,7 @@ validate(){
     fi
 }
 
-
+mkdir -p $LOGS_FOLDER
 dnf module disable nodejs -y &>>$LOG_FILE_NAME
 validate $? "Disabling nodejs"
 

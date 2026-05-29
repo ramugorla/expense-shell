@@ -50,7 +50,41 @@ else
 fi
 
 mkdir -p /app &>>$LOG_FILE_NAME
-validate $? "Creating App directory"
+validate $?  "App directory Already create"
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+
+cd /app
+
+unzip /tmp/backend.zip
+validate $? "Unzip the file"
+
+cd /app
+
+npm install
+validate $? "Installing Dependencies"
+
+cp /home/ec2-user/expense-shell /etc/systemd/system/backend.service
+
+
+systemctl daemon-reload
+validate $? "Systemctl service reloading"
+
+systemctl start backend
+validate $? "backsend restart"
+
+systemctl enable backend
+validate $? "enabling backend"
+
+dnf install mysql -y
+validate $? "Installing mysql client"
+
+mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
+validate $? "Creating mysql schema"
+
+systemctl restart backend
+
+systemctl status backend 
 
 
 

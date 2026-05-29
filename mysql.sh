@@ -8,6 +8,11 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+LOGS_FOLDER="/var/log/script-logs"
+LOG_FILE=$(echo $0 | cut -d "." -f1)
+TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
+LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP"
+
 if [ $USERID -ne 0 ]
 then
     echo "Error:: You should have root access to execute this script"
@@ -24,6 +29,6 @@ validate(){
     fi
 }
 
-
-dnf install mysql-server -y
+mkdir -p $LOGS_FOLDER
+dnf install mysql-server -y &>>$LOG_FILE_NAME
 validate $? "Mysql Server installation"

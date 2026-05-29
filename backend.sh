@@ -75,13 +75,13 @@ validate $? "Installing mysql client"
 mysql -h 172.31.24.79 -uroot -pExpenseApp@1 < /app/schema/backend.sql
 validate $? "Creating mysql schema"
 
-systemctl daemon-reload
-validate $? "Systemctl service reloading"
+systemctl daemon-reload 
+validate $? "Daemon Reload"
 
-systemctl start backend
-validate $? "backend restart"
+systemctl enable backend 
+validate $? "Enabling backend"
 
-systemctl enable backend
-validate $? "enabling backend"
+systemctl restart backend 
+validate $? "Starting Backend"
 
 systemctl status backend 

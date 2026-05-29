@@ -64,7 +64,7 @@ cd /app
 npm install
 validate $? "Installing Dependencies"
 
-cp /home/ec2-user/expense-shell /etc/systemd/system/backend.service
+cp -r /home/ec2-user/expense-shell /etc/systemd/system/backend.service
 
 
 systemctl daemon-reload

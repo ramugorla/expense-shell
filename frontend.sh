@@ -28,4 +28,28 @@ validate(){
     fi
 }
 
+dnf install nginx -y 
+validate $? "Installing nginx"
+
+systemctl enable nginx
+validate$? "Enabling nginx"
+
+systemctl start nginx
+validate $? "starting nginx"
+
+rm -rf /usr/share/nginx/html/*
+validate $? "Removing existing nginx config"
+
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+validate $? "Dowloading code"
+
+cd /usr/share/nginx/html
+
+unzip /tmp/frontend.zip
+validate $? "Unzip the code"
+
+cp  /home/ec2-user/expense-shell/expense.conf /etc/systemd/system/expense.conf
+
+
+systemctl restart nginx
 

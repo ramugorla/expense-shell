@@ -42,3 +42,8 @@ validate $? "Starting Mysqld"
 systemctl status mysqld &>>$LOG_FILE_NAME
 netstat -lntp &>>$LOG_FILE_NAME
 ps -ef | grep mysqld &>>$LOG_FILE_NAME
+
+
+mysql_secure_installation --set-root-pass ExpenseApp@1 
+validate $? "Setting root password to Mysql"
+

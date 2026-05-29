@@ -29,19 +29,19 @@ validate(){
 }
 
 
-dnf module disable nodejs -y 
+dnf module disable nodejs -y &>>$LOG_FILE_NAME
 validate $? "Disabling nodejs"
 
-dnf module enable nodejs:20 -y 
+dnf module enable nodejs:20 -y &>>$LOG_FILE_NAME
 validate $? "enabling nodejs 20"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOG_FILE_NAME
 validate "Installing Nodejs is"
 
-useradd expense 
+useradd expense &>>$LOG_FILE_NAME
 validate $? "Adding user"
 
-mkdir /app
+mkdir /app &>>$LOG_FILE_NAME
 validate $? "Creating App directory"
 
 

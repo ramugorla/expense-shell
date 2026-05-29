@@ -43,7 +43,7 @@ systemctl status mysqld &>>$LOG_FILE_NAME
 netstat -lntp &>>$LOG_FILE_NAME
 ps -ef | grep mysqld &>>$LOG_FILE_NAME
 
-mysql -h 172.31.8.210 -u root -pExpenseApp@1 -e "show databases;"
+mysql -h 172.31.8.210 -u root -pExpenseApp@1 -e "show databases;" &>>$LOG_FILE_NAME
 
 if [ $? -ne 0 ]
 then

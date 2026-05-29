@@ -32,3 +32,13 @@ validate(){
 mkdir -p $LOGS_FOLDER
 dnf install mysql-server -y &>>$LOG_FILE_NAME
 validate $? "Mysql Server installation"
+
+systemctl enable mysqld &>>$LOG_FILE_NAME
+validate $? "Enabling Mysqld"
+
+systemctl restart mysqld &>>$LOG_FILE_NAME
+validate $? "Starting Mysqld"
+
+systemctl status mysqld &>>$LOG_FILE_NAME
+netstat -lntp &>>$LOG_FILE_NAME
+ps -ef | grep mysqld &>>$LOG_FILE_NAME

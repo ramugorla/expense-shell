@@ -29,7 +29,7 @@ validate(){
 }
 
 
-dnf module disable nodjs -y 
+dnf module disable nodejs -y 
 validate $? "Disabling nodejs"
 
 dnf module enable nodejs:20 -y 

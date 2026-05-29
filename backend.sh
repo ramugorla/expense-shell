@@ -69,24 +69,19 @@ validate $? "Installing Dependencies"
 cp -r /home/ec2-user/expense-shell /etc/systemd/system/backend.service
 
 
-systemctl daemon-reload
-validate $? "Systemctl service reloading"
-
-systemctl restart backend
-validate $? "backsend restart"
-
-systemctl enable backend
-validate $? "enabling backend"
-
 dnf install mysql -y
 validate $? "Installing mysql client"
 
 mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
 validate $? "Creating mysql schema"
 
-systemctl restart backend
+systemctl daemon-reload
+validate $? "Systemctl service reloading"
+
+systemctl start backend
+validate $? "backend restart"
+
+systemctl enable backend
+validate $? "enabling backend"
 
 systemctl status backend 
-
-
-
